@@ -1,0 +1,4 @@
+json-tricks==3.13.1
+pip-tools==3.8.0
+pytorch-pretrained-bert==0.6.2
+pytorch-nlp==0.4.1
