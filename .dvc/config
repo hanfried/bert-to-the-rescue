@@ -1,0 +1,4 @@
+['remote "gs"']
+url = gs://hanfried-bert-to-the-rescue-dvc
+[core]
+remote = gs
