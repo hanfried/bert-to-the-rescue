@@ -7,7 +7,7 @@ import numpy as np
 from pytorch_pretrained_bert import BertTokenizer
 from torchnlp.datasets import imdb_dataset
 
-from defaults import BERT_TOKENS_MAX
+from defaults import BERT_TOKENS_MAX, JSON_ARGS
 
 
 def preprocess_imdb(
@@ -73,11 +73,10 @@ def preprocess_imdb(
 def cli(train_size, test_size, output_file):
     result = preprocess_imdb(train_size=train_size, test_size=test_size)
 
-    json_args = {"indent": 4, "sort_keys": True}
     if output_file:
-        json.dump(result, output_file, **json_args)
+        json.dump(result, output_file, **JSON_ARGS)
     else:
-        print(json.dumps(result, **json_args))
+        print(json.dumps(result, **JSON_ARGS))
 
 
 if __name__ == "__main__":

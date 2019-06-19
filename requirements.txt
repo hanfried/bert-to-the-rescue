@@ -43,6 +43,7 @@ humanize==0.5.1           # via dvc
 idna==2.8                 # via requests
 inflect==2.1.0            # via dvc
 jmespath==0.9.4           # via boto3, botocore
+joblib==0.13.2            # via scikit-learn
 json-tricks==3.13.1
 jsonpath-ng==1.4.3        # via dvc
 keras-applications==1.0.8  # via tensorflow
@@ -50,7 +51,7 @@ keras-preprocessing==1.1.0
 markdown==3.1.1           # via tensorboard
 nanotime==0.5.2           # via dvc
 networkx==2.3             # via dvc
-numpy==1.16.4             # via h5py, keras-applications, keras-preprocessing, pandas, pytorch-nlp, pytorch-pretrained-bert, tensorboard, tensorflow, torch
+numpy==1.16.4             # via h5py, keras-applications, keras-preprocessing, pandas, pytorch-nlp, pytorch-pretrained-bert, scikit-learn, scipy, tensorboard, tensorflow, torch
 pandas==0.24.2            # via pytorch-nlp
 pillow==6.0.0             # via asciimatics
 pip-tools==3.8.0
@@ -70,6 +71,8 @@ rsa==4.0                  # via google-auth
 ruamel.yaml==0.15.97      # via dvc
 s3transfer==0.2.1         # via boto3
 schema==0.7.0             # via dvc
+scikit-learn==0.21.2
+scipy==1.3.0              # via scikit-learn
 six==1.12.0               # via absl-py, configobj, google-api-core, google-auth, google-resumable-media, grpcio, h5py, jsonpath-ng, keras-preprocessing, pip-tools, protobuf, python-dateutil, tensorboard, tensorflow
 smmap2==2.0.5             # via gitdb2
 tensorboard==1.14.0       # via tensorflow

@@ -1,0 +1,14 @@
+md5: 1c376808b369131c8ee07bc3c3d3415a
+cmd: python baseline.py -o baseline.json
+wdir: .
+deps:
+- md5: a69352beceed0a23c3eb17c7ec8c62d3
+  path: data.json
+outs:
+- md5: db894021a3e979b783cec143e9f12f7c
+  path: baseline.json
+  cache: false
+  metric:
+    type: json
+    xpath: accuracy
+  persist: false

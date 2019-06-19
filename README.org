@@ -59,3 +59,11 @@ $ source env/bin/activate
   2003
 ]
 #+END_SRC
+
+** Baseline
+
+#+BEGIN_SRC sh
+(env) dvc run -d data.json -M baseline.json python baseline.py -o baseline.json
+(env) dvc metrics show
+        baseline.json: [0.8]
+#+END_SRC
