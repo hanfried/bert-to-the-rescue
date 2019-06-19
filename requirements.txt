@@ -4,18 +4,28 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
+absl-py==0.7.1            # via tensorboard, tensorflow
+astor==0.8.0              # via tensorflow
 boto3==1.9.170            # via pytorch-pretrained-bert
 botocore==1.12.170        # via boto3, s3transfer
 certifi==2019.6.16        # via requests
 chardet==3.0.4            # via requests
 click==7.0                # via pip-tools
 docutils==0.14            # via botocore
+gast==0.2.2               # via tensorflow
+google-pasta==0.1.7       # via tensorflow
+grpcio==1.21.1            # via tensorboard, tensorflow
+h5py==2.9.0               # via keras-applications
 idna==2.8                 # via requests
 jmespath==0.9.4           # via boto3, botocore
 json-tricks==3.13.1
-numpy==1.16.4             # via pandas, pytorch-nlp, pytorch-pretrained-bert, torch
+keras-applications==1.0.8  # via tensorflow
+keras-preprocessing==1.1.0
+markdown==3.1.1           # via tensorboard
+numpy==1.16.4             # via h5py, keras-applications, keras-preprocessing, pandas, pytorch-nlp, pytorch-pretrained-bert, tensorboard, tensorflow, torch
 pandas==0.24.2            # via pytorch-nlp
 pip-tools==3.8.0
+protobuf==3.8.0           # via tensorboard, tensorflow
 python-dateutil==2.8.0    # via botocore, pandas
 pytorch-nlp==0.4.1
 pytorch-pretrained-bert==0.6.2
@@ -23,7 +33,17 @@ pytz==2019.1              # via pandas
 regex==2019.6.8           # via pytorch-pretrained-bert
 requests==2.22.0          # via pytorch-nlp, pytorch-pretrained-bert
 s3transfer==0.2.1         # via boto3
-six==1.12.0               # via pip-tools, python-dateutil
+six==1.12.0               # via absl-py, grpcio, h5py, keras-preprocessing, pip-tools, protobuf, python-dateutil, tensorboard, tensorflow
+tensorboard==1.14.0       # via tensorflow
+tensorflow-estimator==1.14.0rc1  # via tensorflow
+tensorflow==1.14.0
+termcolor==1.1.0          # via tensorflow
 torch==1.1.0              # via pytorch-pretrained-bert
 tqdm==4.32.1              # via pytorch-nlp, pytorch-pretrained-bert
 urllib3==1.25.3           # via botocore, requests
+werkzeug==0.15.4          # via tensorboard
+wheel==0.33.4             # via tensorboard, tensorflow
+wrapt==1.11.2             # via tensorflow
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools==41.0.1        # via markdown, protobuf, tensorboard

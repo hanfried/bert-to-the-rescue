@@ -1,6 +1,7 @@
 import json_tricks as json
 import random
 
+from keras.preprocessing.sequence import pad_sequences
 import numpy as np
 from pytorch_pretrained_bert import BertTokenizer
 from torchnlp.datasets import imdb_dataset
@@ -36,7 +37,13 @@ def preprocess_imdb(
     )
 
     train_tokens_ids, test_tokens_ids = (
-        [tokenizer.convert_tokens_to_ids(t) for t in tokens]
+        pad_sequences(
+            [tokenizer.convert_tokens_to_ids(t) for t in tokens],
+            maxlen=BERT_TOKENS_MAX,
+            truncating="post",
+            padding="post",
+            dtype="int",
+        )
         for tokens in (train_tokens, test_tokens)
     )
 

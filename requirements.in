@@ -1,4 +1,6 @@
 json-tricks==3.13.1
+keras-preprocessing==1.1.0
 pip-tools==3.8.0
 pytorch-pretrained-bert==0.6.2
 pytorch-nlp==0.4.1
+tensorflow==1.14.0  # only needed for keras-preprocessing
