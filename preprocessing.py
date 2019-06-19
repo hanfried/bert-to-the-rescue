@@ -1,6 +1,7 @@
 import json_tricks as json
 import random
 
+import click
 from keras.preprocessing.sequence import pad_sequences
 import numpy as np
 from pytorch_pretrained_bert import BertTokenizer
@@ -14,7 +15,7 @@ def preprocess_imdb(
     test_size: int = 100,
     bert_model: str = "bert-base-uncased",
     do_lower_case: bool = True,
-):
+) -> dict:
     train_data, test_data = imdb_dataset(train=True, test=True)
     random.shuffle(train_data)
     random.shuffle(test_data)
@@ -65,6 +66,19 @@ def preprocess_imdb(
     }
 
 
+@click.command()
+@click.option("--train-size", type=int, default=1000)
+@click.option("--test-size", type=int, default=100)
+@click.option("-o", "--output-file", type=click.File("w"))
+def cli(train_size, test_size, output_file):
+    result = preprocess_imdb(train_size=train_size, test_size=test_size)
+
+    json_args = {"indent": 4, "sort_keys": True}
+    if output_file:
+        json.dump(result, output_file, **json_args)
+    else:
+        print(json.dumps(result, **json_args))
+
+
 if __name__ == "__main__":
-    result = preprocess_imdb(train_size=5, test_size=3)
-    print(json.dumps(result, indent=4, sort_keys=True))
+    cli()

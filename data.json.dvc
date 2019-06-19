@@ -1,0 +1,9 @@
+md5: 41ece63ce115f052ff670da07d457c38
+cmd: python preprocessing.py -o data.json
+wdir: .
+outs:
+- md5: a69352beceed0a23c3eb17c7ec8c62d3
+  path: data.json
+  cache: true
+  metric: false
+  persist: false

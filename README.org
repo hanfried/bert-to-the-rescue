@@ -7,13 +7,55 @@ Following https://towardsdatascience.com/bert-to-the-rescue-17671379687f
 ** Installation
 
 #+BEGIN_SRC sh
-virtualenv --python=python3.7 env
-source env/bin/activate
-pip install -r requirements.txt
+$ virtualenv --python=python3.7 env
+$ source env/bin/activate
+(env) pip install -r requirements.txt
 #+END_SRC
 
 ** Preprocessing
 
 #+BEGIN_SRC sh
-python preprocessing.py | fx
+(env) dvc run -o data.json "python preprocessing.py -o data.json"
+(env) jq 'keys' data.json
+[
+  "test_labels",
+  "test_texts",
+  "test_tokens",
+  "test_tokens_ids",
+  "test_y",
+  "train_labels",
+  "train_texts",
+  "train_tokens",
+  "train_tokens_ids",
+  "train_y"
+]
+(env) jq '.train_texts | length' data.json
+1000
+(env) jq '.test_texts | length' data.json
+100
+(env) jq '.train_texts[0][:100]' data.json
+"In this excellent Twentieth-Century Fox film-noir, the metropolis is a labyrinth of despair in which"
+(env) jq '.train_tokens_ids.shape' data.json
+[
+  1000,
+  512
+]
+(env) jq '.train_tokens_ids.__ndarray__[0][:15]' data.json
+[
+  101,
+  1999,
+  2023,
+  6581,
+  9086,
+  1011,
+  2301,
+  4419,
+  2143,
+  1011,
+  15587,
+  1010,
+  1996,
+  18236,
+  2003
+]
 #+END_SRC
