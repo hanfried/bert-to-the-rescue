@@ -14,22 +14,16 @@ from defaults import BATCH_SIZE, EPOCHS, device
 
 
 def train(
-    train_tokens_ids: np.ndarray, train_y: np.ndarray, batch_size: int, epochs: int
-):
-    train_tokens_tensor = torch.tensor(train_tokens_ids)
-    train_y_tensor = torch.tensor(train_y.reshape(-1, 1)).float()
-    train_masks = [
-        [float(tid > 0) for tid in token_ids] for token_ids in train_tokens_ids
-    ]
-    train_masks_tensor = torch.tensor(train_masks)
+    tokens_ids: np.ndarray, y: np.ndarray, batch_size: int, epochs: int
+) -> BertBinaryClassifier:
+    tokens_tensor = torch.tensor(tokens_ids)
+    y_tensor = torch.tensor(y.reshape(-1, 1)).float()
+    masks = [[float(tid > 0) for tid in token_ids] for token_ids in tokens_ids]
+    masks_tensor = torch.tensor(masks)
 
-    train_dataset = TensorDataset(
-        train_tokens_tensor, train_masks_tensor, train_y_tensor
-    )
-    train_sampler = RandomSampler(train_dataset)
-    train_dataloader = DataLoader(
-        train_dataset, sampler=train_sampler, batch_size=batch_size
-    )
+    dataset = TensorDataset(tokens_tensor, masks_tensor, y_tensor)
+    sampler = RandomSampler(dataset)
+    dataloader = DataLoader(dataset, sampler=sampler, batch_size=batch_size)
 
     model = BertBinaryClassifier().cuda()
     optimizer = Adam(model.parameters(), lr=3e-6)
@@ -42,22 +36,22 @@ def train(
     )
     for epoch_nr in range(epochs):
         logger.info("epoch={nr}", nr=epoch_nr)
-        train_loss = 0
-        steps_tqdm = tqdm(enumerate(train_dataloader), total=len(train_y) // batch_size)
+        loss = 0
+        steps_tqdm = tqdm(enumerate(dataloader), total=len(y) // batch_size)
         for step_nr, batch_data in steps_tqdm:
             token_ids, masks, labels = tuple(bd.to(device) for bd in batch_data)
             logits = model(token_ids, masks)
 
             loss_func = torch.nn.BCELoss()
             batch_loss = loss_func(logits, labels)
-            train_loss += batch_loss.item()
+            loss += batch_loss.item()
 
             model.zero_grad()
             batch_loss.backward()
 
             clip_grad_norm_(parameters=model.parameters(), max_norm=1.0)
             optimizer.step()
-            steps_tqdm.set_postfix(loss=train_loss / (step_nr + 1))
+            steps_tqdm.set_postfix(loss=loss / (step_nr + 1))
 
     return model
 
