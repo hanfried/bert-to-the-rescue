@@ -111,3 +111,13 @@ BertBinaryClassifier(
   ]
 }
 #+END_SRC
+
+** Evaluation
+
+#+BEGIN_SRC sh
+(env) dvc run -d data.json -M evaluation.json "python evaluate.py -o evaluation.json"
+(env) dvc metrics modify evaluation.json --type json --xpath "accuracy"
+(env) dvc metric show
+        evaluation.json: [0.91]
+        baseline.json: [0.8]
+#+END_SRC

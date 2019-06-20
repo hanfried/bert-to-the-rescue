@@ -1,0 +1,14 @@
+md5: 78bdf4d25853bd12bdfe3a89b7b1bd42
+cmd: python evaluate.py -o evaluation.json
+wdir: .
+deps:
+- md5: a69352beceed0a23c3eb17c7ec8c62d3
+  path: data.json
+outs:
+- md5: f8137427d787bca8b30ff10b077f1935
+  path: evaluation.json
+  cache: false
+  metric:
+    type: json
+    xpath: accuracy
+  persist: false
