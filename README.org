@@ -67,3 +67,31 @@ $ source env/bin/activate
 (env) dvc metrics show
         baseline.json: [0.8]
 #+END_SRC
+
+** Model
+
+#+BEGIN_SRC python
+>>> from model import BertBinaryClassifier
+>>> BertBinaryClassifier()
+BertBinaryClassifier(
+  (bert): BertModel(
+    (embeddings): BertEmbeddings(
+      (word_embeddings): Embedding(30522, 768, padding_idx=0)
+      ...
+  (encoder): BertEncoder(
+      (layer): ModuleList(
+        (0): BertLayer(
+          (attention): BertAttention(
+          ...
+  ...
+  (dropout): Dropout(p=0.1)
+  (linear): Linear(in_features=768, out_features=1, bias=True)
+  (sigmoid): Sigmoid()
+)
+#+END_SRC
+
+** Train
+
+#+BEGIN_SRC sh
+(env) dvc run -d data.json -o model.pt python train.py
+#+END_SRC

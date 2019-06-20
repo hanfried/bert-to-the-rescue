@@ -7,13 +7,13 @@ import numpy as np
 from pytorch_pretrained_bert import BertTokenizer
 from torchnlp.datasets import imdb_dataset
 
-from defaults import BERT_TOKENS_MAX, JSON_ARGS
+from defaults import BERT_MODEL, BERT_TOKENS_MAX, JSON_ARGS
 
 
 def preprocess_imdb(
     train_size: int = 1000,
     test_size: int = 100,
-    bert_model: str = "bert-base-uncased",
+    bert_model: str = BERT_MODEL,
     do_lower_case: bool = True,
 ) -> dict:
     train_data, test_data = imdb_dataset(train=True, test=True)

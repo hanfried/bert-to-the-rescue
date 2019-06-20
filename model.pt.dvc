@@ -1,0 +1,12 @@
+md5: 1a1c59e6b57a335eb8c0924bcae0a43b
+cmd: python train.py
+wdir: .
+deps:
+- md5: a69352beceed0a23c3eb17c7ec8c62d3
+  path: data.json
+outs:
+- md5: 6cef1915affcc76707fef5cc518075fa
+  path: model.pt
+  cache: true
+  metric: false
+  persist: false
