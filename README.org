@@ -95,3 +95,19 @@ BertBinaryClassifier(
 #+BEGIN_SRC sh
 (env) dvc run -d data.json -o model.pt python train.py
 #+END_SRC
+
+** Predict
+
+#+BEGIN_SRC sh
+(env) echo '["What an awesome movie", "The worst BS I ever watched"]' | python predict.py
+{
+  "logits": [
+    0.9726486206054688,
+    0.0018245105165988207
+  ],
+  "predictions": [
+    true,
+    false
+  ]
+}
+#+END_SRC
